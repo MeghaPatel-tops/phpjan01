@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main{
+            height: 100px;
+            width: 100px;
+        }
+        .first{
+           
+            border:2px solid black;
+        }
+        .sec{
+            border:3px solid blue;
+            border-radius: 20px;
+        }
+        .third{
+            border:3px solid blue;
+            border-top-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+        .forth{
+            border:5px solid blue;
+            /*   dashed,doted        */
+            border-style:double;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <h1>Simple border example</h1>
+    <div class="main first"></div>
+    <h1>Border radius</h1>
+    <div class="main sec"></div>
+    <h1>Border radius top bottom</h1>
+    <div class="main third"></div>
+    <h1>Border radius 50%(circle)</h1>
+    <div class="main forth"></div>
+    <h1>Border <style></style></h1>
+    <div class="main forth"></div>
+</body>
+</html>

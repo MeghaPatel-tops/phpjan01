@@ -1,0 +1,111 @@
+.third{
+    background-color: aqua;
+    color: black;
+    width: 50%;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+}
+
+/* ============================  */
+header {
+    background-color: navy;
+}
+
+header .boxlayout {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 10px;
+}
+
+header .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+header .navbar .logo h1 {
+    font-size: 40px;
+    text-transform: uppercase;
+}
+
+header .navbar .logo h1 a {
+    color: orange;
+}
+
+header .navbar .logo h1 a span {
+    color: white;
+}
+
+header .navbar .nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+header .navbar .nav li {
+    padding: 7px;
+}
+
+header .navbar .nav li a {
+    font-size: 17px;
+    color: white;
+}
+
+/* ============= dropdown======== */
+header .navbar .nav .dropdown {
+    position: relative;
+}
+
+header .navbar .nav .drop-menu {
+    position: absolute;
+    display: none;
+    background-color: gray;
+    padding: 12px;
+    width: 100px;
+    border-radius: 5px;
+    top: 34px;
+    left: -10px;
+}
+
+header .navbar .nav .dropdown:hover .drop-menu {
+    display: block;
+}
+
+header .navbar .search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header .navbar .search button {
+    height: 40px;
+    width: 40px;
+    font-size: 16px;
+    border: none;
+}
+
+header .navbar .search .btn1 {
+    background-color: white;
+    border-radius: 5px;
+}
+
+header .navbar .search .btn2 {
+    font-size: 23px;
+    color: white;
+    background-color: transparent;
+}
