@@ -14,6 +14,7 @@
     </style>
 </head>
 <body>
+   
     <form method="post">
         <h1>Check Given number is Even or Odd</h1>
         <label for="">Enter the number</label>
