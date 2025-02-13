@@ -7,6 +7,7 @@
 </head>
 <body>
     <?php
+    echo "<pre>";
     $fruit = ["Apple","kiwi","banana","mango"];
 
     $Subject=["subjectcode"=>"00k1","title"=>"test titel","duration"=>"8month"];
