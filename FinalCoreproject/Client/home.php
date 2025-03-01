@@ -1,3 +1,6 @@
+<?php
+include('../connection.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +25,13 @@
 </head>
 <body>
     <div class="background">
-        <h1>Welcome To Home Page:</h1>
+        <h1>Welcome To Home Page:
+            <?php if(isset($_SESSION['user'])){
+                echo $_SESSION['user']->username;
+            }
+            ?>
+        </h1>
+        <li><a href="logout.php">Logout</a></li>
     </div>
    
 </body>

@@ -84,7 +84,7 @@ label{
     font-size: 16px;
     font-weight: 500;
 }
-input{
+.inputclass{
     display: block;
     height: 50px;
     width: 100%;
@@ -143,11 +143,18 @@ input{
         <h3>Login Here</h3>
 
         <label for="username">Email</label>
-        <input type="email" placeholder="Email" id="username" name="email">
+        <input type="email" placeholder="Email" id="username" name="email" class="inputclass" value="<?php
+        echo $_COOKIE['email'] ?? "";
+        ?>">
 
         <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password" name="password">
-
+        <input type="password" placeholder="Password" id="password" name="password" class="inputclass" value="<?php
+        echo $_COOKIE['password'] ?? "";
+        ?>">
+      
+        
+        <br>
+        <input type="checkbox"  name="check"><span>Reminder Me</span>
         <input type="submit" value="Submit" name="submit" class="regbtn">
         
     </form>
@@ -159,10 +166,15 @@ if(isset($_POST['submit'])){
 
     $email=$_POST['email'];
     $password=$_POST['password'];
+    if(isset($_POST['check'])){
+        setcookie("email",$email,time()+1200);
+        setcookie("password",$password,time()+1200);
+    }
     echo $query = "select * from users where email='$email' and password='$password'";
     $req=$connection->query($query);
     $row=$req->fetch_object();
-   
+    $_SESSION['user']= $row;
+    header("Location:home.php");
 }    
 
 ?>
