@@ -13,6 +13,10 @@ class User{
         echo "<h1>Email:".$this->email."</h1>";
         echo "<h1>Conatct:".$this->contact."</h1>";
     }
+
+    function __destruct(){
+        echo "desctructor method called";
+    }
     
 
   

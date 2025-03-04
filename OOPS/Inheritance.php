@@ -2,6 +2,10 @@
     class Category{
         public $cid,$categoryName;
 
+        function __construct(){
+            echo "Parent class ";
+        }
+
         function getCategoryData(){
             $this->cid=1;
             $this->categoryName="eletronic";
@@ -9,8 +13,13 @@
     }
 
     class Product extends Category{
+
         private $pid,$pname,$price,$description;//data member
     
+        public function __construct(){
+            parent :: __construct();//parent class constructor called;
+            echo "child class <br>";
+        }
         public function getProduct(){
                 $this->pid=1;
                 $this->pname="test product";
