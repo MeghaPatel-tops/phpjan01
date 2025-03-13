@@ -41,9 +41,15 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="categoryadd" class="nav-link">
+                <a href="viewcategory" class="nav-link">
                  
                   <p>Category</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="productindex" class="nav-link">
+                 
+                  <p>Products</p>
                 </a>
               </li>
               

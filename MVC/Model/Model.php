@@ -23,6 +23,15 @@ class Model{
         return $res;
         
     }
+
+    public function select_data($table){
+        $query = "select * from $table";
+        $req= $this->connection->query($query);
+        while($row=$req->fetch_object()){
+            $rw[]=$row;
+        }
+        return $rw;
+    }
 }
 
 

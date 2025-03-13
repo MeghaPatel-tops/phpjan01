@@ -26,10 +26,44 @@ class Controller extends Model{
                     $insertData = ['cname'=>$cname,'cimage'=>$imgname];
                     $res=$this->insert_data("category",$insertData);
                     if(isset($res)){
+                        header("Location:http://localhost/jaN01PHP/MVC/viewcategory ");
                         echo "<p class 'alert alert-success'>Data successfullly inserted</p>";
                     }
                 }
                 
+            }
+        }
+
+        public function viewcategory(){
+            $catdata = $this->select_data("category");
+            include('View/viewcategory.php');
+        }
+        public function productindex(){
+            $productdata = $this->select_data("products");
+            include('View/productindex.php');
+        }
+        public function productcreate(){
+            $catdata = $this->select_data("category");
+            include('View/productcreate.php');
+            if(isset($_REQUEST['submit'])){
+                if(isset($_FILES['pimage']['name'])){
+                    $temp = $_FILES['pimage']['tmp_name'];
+                    $imgname=$_FILES['pimage']['name'];
+                    move_uploaded_file($temp,"upload/".$imgname);
+                $productdata=[
+                    "pname"=>$_REQUEST['pname'],
+                    "price"=>$_REQUEST['price'],
+                    "description"=>$_REQUEST['desc'],
+                    "qty"=>$_REQUEST['qty'],
+                    "catid"=>$_REQUEST['catid'],
+                    "pimg"=>$imgname
+                ];
+                $response=$this->insert_data("products",$productdata);
+                if(isset($response)){
+                    header("Location:http://localhost/jaN01PHP/MVC/product ");
+                    echo "<p class 'alert alert-success'>Data successfullly inserted</p>";
+                }
+                }
             }
         }
 }

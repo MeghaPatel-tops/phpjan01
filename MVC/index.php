@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include('Model/Model.php');
 include('Controller/Contoller.php');
 
@@ -23,6 +24,15 @@ else if(isset($path) && $path =="home"){
 }
 else if(isset($path) && $path =="categoryadd"){
     $objController->catadd();
+}
+else if(isset($path)&&$path =="viewcategory"){
+    $objController->viewcategory();
+}
+else if(isset($path)&&$path =="productindex"){
+    $objController->productindex();
+}
+else if(isset($path)&&$path =="productadd"){
+    $objController->productcreate();
 }
 
 ?>
