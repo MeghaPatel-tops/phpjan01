@@ -10,6 +10,9 @@ $UriSegment = $_SERVER['REQUEST_URI'];
 $arrayURI= explode("/",$UriSegment);
 
 $path = $arrayURI[3];
+$query= (isset($arrayURI[4]))?$arrayURI[4]:0;
+
+$GLOBALS['baseUrl'] = "http://localhost/jaN01PHP/MVC";
 
 //$objController->index();
 
@@ -33,6 +36,13 @@ else if(isset($path)&&$path =="productindex"){
 }
 else if(isset($path)&&$path =="productadd"){
     $objController->productcreate();
+}
+else if(isset($path)&&$path =="deleteproduct"){
+    $objController->deleteproduct($query);
+}
+
+else if(isset($path)&&$path =="editproduct"){
+    $objController->editproduct($query);
 }
 
 ?>

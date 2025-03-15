@@ -55,6 +55,7 @@
                           <th>Decription</th>
                           <th>Quantity</th>
                           <th>Image</th>
+                          <th colspan="2">Action</th>
                           
                       </thead>
                       <tbody>
@@ -69,6 +70,10 @@
                           <td><?php echo $index->description?></td>
                           <td><?php echo $index->qty?></td>
                           <td><img src="upload/<?php echo $index->pimg?>" alt="" width="80px" height="80px"></td>
+                          <td><a href="deleteproduct/<?php echo $index->pid?>" class="btn btn-danger">DELETE</a></td>
+                          <td>
+                            <a href="editproduct/<?php echo $index->pid?>" class="btn btn-success">EDIT</a>
+                          </td>
                          
                             
                         </tr>

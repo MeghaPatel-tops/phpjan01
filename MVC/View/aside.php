@@ -29,25 +29,25 @@
             >
              
               <li class="nav-item">
-                <a href="home" class="nav-link">
+                <a href="<?php echo $GLOBALS['baseUrl']?>/home" class="nav-link">
                  
                   <p>Home</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="about" class="nav-link">
+                <a href="<?php echo $GLOBALS['baseUrl']?>/about" class="nav-link">
                  
                   <p>About</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="viewcategory" class="nav-link">
+                <a href="<?php echo $GLOBALS['baseUrl']?>/viewcategory" class="nav-link">
                  
                   <p>Category</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="productindex" class="nav-link">
+                <a href="<?php echo $GLOBALS['baseUrl']?>/productindex" class="nav-link">
                  
                   <p>Products</p>
                 </a>

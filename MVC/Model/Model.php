@@ -30,7 +30,59 @@ class Model{
         while($row=$req->fetch_object()){
             $rw[]=$row;
         }
-        return $rw;
+        return $rw ?? [];
+    }
+
+    public function delete_data($table,$where){
+        //$where = ["id"=>1];
+        //$table= table name of db;
+        //basic query = delete from table where id=1;
+        $query ="delete from $table where 1=1";
+        foreach($where as $key=>$value){
+            $query.= " And ".$key . "= '".$value."'";
+        }
+        $res = $this->connection->query($query);
+        return $res;
+    }
+
+    public function findOne($table,$where){
+        //$where = ["id"=>1];
+        //$table= table name of db;
+        //basic query = select *  from table where id=1;
+        $query ="select  * from $table where 1=1";
+        foreach($where as $key=>$value){
+            $query.= " And ".$key . "= '".$value."'";
+        }
+        $res = $this->connection->query($query);
+        $rw = $res->fetch_object();
+
+
+        return $rw ?? "";
+    }
+
+    public function updateData($table,$setSrray,$where){
+        //update table set key ='value',key='value ' where id=1;
+        $query= "update $table set ";
+        $count = count($setSrray);
+        $i=0;
+        foreach($setSrray as $key =>$value){
+            $i++;
+            if($i > $count-1){
+                $query.=" ". $key ." = '".$value ." ' ";
+            }
+            else{
+                $query.=" ". $key ." = '".$value ." ',";
+            }
+            
+        }
+        $query.=" where 1=1";
+        foreach($where as $key=>$value){
+            $query.= " And ".$key . "= '".$value."'";
+        }
+        echo $query;
+
+        $res = $this->connection->query($query);
+        return $res;
     }
 }
 
