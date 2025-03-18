@@ -2,6 +2,10 @@
 ob_start();
 include('Model/Model.php');
 include('Controller/Contoller.php');
+include('Controller/UserController.php');
+
+
+$userObj= new UserController();
 
 $objController = new Controller();
 
@@ -43,6 +47,10 @@ else if(isset($path)&&$path =="deleteproduct"){
 
 else if(isset($path)&&$path =="editproduct"){
     $objController->editproduct($query);
+}
+
+else if(isset($path)&&$path =="user"){
+    $userObj->userhome();
 }
 
 ?>
