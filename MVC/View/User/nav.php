@@ -16,8 +16,24 @@
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><button type="button" class="btn btn-default btn-lg" id="myBtn">Login</button></li>
-        <?php include('login.php');?>
+         
+          <?php
+                if(isset($_SESSION['user'])){
+                  ?>
+                  <li style="color:white;margin-top:15px;margin-right:50px"><span>Welocme:<?php echo $_SESSION['user']->username ?? "";?></span></li>
+                  <li><a class="btn btn-link" href="<?php echo $GLOBALS['baseUrl']?>/logout">Logout</a></li>
+                  <?php
+                }
+                else{
+                  ?>
+                  <li><button type="button" class="btn btn-link" id="myBtn">Login</button></li>
+                  <?php include('login.php');?>
+                  
+                  <?php
+                }
+
+          ?>
+        
       </ul>
     </div>
   </div>

@@ -1,8 +1,10 @@
 <?php
 ob_start();
+session_start();
 include('Model/Model.php');
 include('Controller/Contoller.php');
 include('Controller/UserController.php');
+
 
 
 $userObj= new UserController();
@@ -51,6 +53,16 @@ else if(isset($path)&&$path =="editproduct"){
 
 else if(isset($path)&&$path =="user"){
     $userObj->userhome();
+}
+else if(isset($path) && $path =="registration"){
+    $userObj->Registration();
+}
+else if(isset($path) && $path =="login"){
+    $userObj->Login();
+}
+
+else if(isset($path) && $path =="logout"){
+    $userObj->Logout();
 }
 
 ?>
