@@ -1,6 +1,8 @@
 <?php
 ob_start();
 session_start();
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
 include('Model/Model.php');
 include('Controller/Contoller.php');
 include('Controller/UserController.php');
@@ -63,6 +65,10 @@ else if(isset($path) && $path =="login"){
 
 else if(isset($path) && $path =="logout"){
     $userObj->Logout();
+}
+
+else if(isset($path) && $path =="apiproduct"){
+    $objController->apiproduct();
 }
 
 ?>

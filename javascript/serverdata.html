@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Document</title>
+    <script>
+         const getProductData=async()=>{
+                const data = await fetch("http://localhost/jaN01PHP/MVC/apiproduct");
+                var result = await data.text();
+                result = JSON.parse(result);
+                console.log(result)
+                str="";
+                for(index of result){
+                    str+= `<tr>
+                    <td>${index.pname}</td>
+                    <td>${index.price}</td>
+                    <td>${index.qty}</td>
+                    </tr>`;
+                }
+                document.getElementById("tdata").innerHTML =str;
+            }
+    </script>
+</head>
+<body>
+    <button onclick="getProductData()" class="btn btn-primary">Get Product</button>
+    <div class="container">
+        <h2>Basic Table</h2>
+        <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>            
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ProductName</th>
+              <th>price</th>
+              <th>qty</th>
+            </tr>
+          </thead>
+          <tbody id="tdata">
+            
+          </tbody>
+        </table>
+      </div>
+</body>
+</html>

@@ -38,6 +38,11 @@ class Controller extends Model{
             $catdata = $this->select_data("category");
             include('View/viewcategory.php');
         }
+        public function apiproduct(){
+           
+            $productdata = $this->select_data("products");
+            echo  json_encode($productdata);
+        }
         public function productindex(){
             $productdata = $this->select_data("products");
             include('View/productindex.php');
