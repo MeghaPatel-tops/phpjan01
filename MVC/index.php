@@ -71,4 +71,8 @@ else if(isset($path) && $path =="apiproduct"){
     $objController->apiproduct();
 }
 
+else if(isset($path) && $path =="getProduct"){
+    $objController->getProductByCatid($query);
+}
+
 ?>

@@ -11,11 +11,11 @@
 
     <div class="col-sm-10 text-left"> 
       <h1>Welcome</h1>
-        <div class="row">
+        <div class="row" id="productbycatid">
             <?php
                 foreach($products as $key){
                     ?>
-                           <div class="col-md-4">
+                      <div class="col-md-4">
                         <div class="card productcard" style="width: 18rem;">
                             <img src="<?php echo $GLOBALS['baseUrl'].'/upload/'.$key->pimg?>" class="card-img-top productimage" alt="" >
                             <div class="card-body">

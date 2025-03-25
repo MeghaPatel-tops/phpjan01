@@ -60,6 +60,21 @@ class Model{
         return $rw ?? "";
     }
 
+    public function findAllById($table,$where){
+        //$where = ["id"=>1];
+        //$table= table name of db;
+        //basic query = select *  from table where id=1;
+        $query ="select  * from $table where 1=1";
+        foreach($where as $key=>$value){
+            $query.= " And ".$key . "= '".$value."'";
+        }
+        $req = $this->connection->query($query);
+        while($row=$req->fetch_object()){
+            $rw[]=$row;
+        }
+        return $rw ?? [];
+    }
+
     public function updateData($table,$setSrray,$where){
         //update table set key ='value',key='value ' where id=1;
         $query= "update $table set ";

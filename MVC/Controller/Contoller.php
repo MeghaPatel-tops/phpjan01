@@ -117,6 +117,19 @@ class Controller extends Model{
             }
             
         }
+
+        public function getProductByCatid($query){
+            $productData=[];
+            if($query==0){
+                $productData = $this->select_data("products");
+            }
+            else{
+                $productData = $this->findAllById("products",["catid"=>$query]);
+            }
+            if(isset($productData)){
+                    echo json_encode($productData);
+            }
+        }
 }
 
 
