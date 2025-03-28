@@ -17,7 +17,7 @@
                     ?>
                       <div class="col-md-4">
                         <div class="card productcard" style="width: 18rem;">
-                            <img src="<?php echo $GLOBALS['baseUrl'].'/upload/'.$key->pimg?>" class="card-img-top productimage" alt="" >
+                            <img id="img_<?php echo $key->pid?>" src="<?php echo $GLOBALS['baseUrl'].'/upload/'.$key->pimg?>" class="card-img-top productimage" alt="" >
                             <div class="card-body">
                                 <h5 class="card-title"><b><?php echo $key->pname;?></b></h5>
                                 <p class="card-text">Price:<?php echo $key->price;?></p>
@@ -36,5 +36,22 @@
     
   </div>
 </div>
+<script>
+   $( document ).ready(function() {
+    $(".productimage").mouseenter(function(){
+      var id = this.id;
+      $("#"+id).css("height","200px");
+      $("#"+id).css("width","200px");
+    });
+  
+    $(".productimage").mouseleave(function(){
+      var id = this.id;
+      $("#"+id).css("height","150px");
+      $("#"+id).css("width","150px");
+    });
+      
+
+});
+  </script>
 <?php include('footer.php')?>
 

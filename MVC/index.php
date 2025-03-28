@@ -6,12 +6,15 @@ header("Access-Control-Allow-Headers: *");
 include('Model/Model.php');
 include('Controller/Contoller.php');
 include('Controller/UserController.php');
+include('Controller/ApiController.php');
 
 
 
 $userObj= new UserController();
 
 $objController = new Controller();
+
+$apiObj = new ApiController();
 
 $UriSegment = $_SERVER['REQUEST_URI'];
 
@@ -67,12 +70,16 @@ else if(isset($path) && $path =="logout"){
     $userObj->Logout();
 }
 
-else if(isset($path) && $path =="apiproduct"){
-    $objController->apiproduct();
-}
+
 
 else if(isset($path) && $path =="getProduct"){
     $objController->getProductByCatid($query);
+}
+else if(isset($path) && $path =="apiproduct"){
+    $apiObj->index();
+}
+else if(isset($path) && $path =="apiproductadd"){
+    $apiObj->create();
 }
 
 ?>
