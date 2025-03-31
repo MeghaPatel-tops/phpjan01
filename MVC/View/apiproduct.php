@@ -51,7 +51,8 @@
                   <form method="post" enctype="multipart/form-data" id="productform">
                     <!--begin::Body-->
                     <div class="card-body">
-                      <div class="mb-2">
+                      
+                      <div class="mb-2 col-md-6">
                         <label for="exampleInputEmail1" class="form-label"
                           >Product Name</label
                         >
@@ -62,7 +63,6 @@
                           aria-describedby="emailHelp"
                           name="pname"
                         />
-                        <div class="mb-2">
                         <div class="col-md-6">
                           <label for="" class="form-label">State</label>
                           <select class="form-select" id="catid" required name="catid"   >
@@ -77,7 +77,7 @@
                             ?>
                           </select>
                          
-                        </div>
+                        
                         </div>
                       </div>
                       <div class="mb-2">
@@ -132,10 +132,28 @@
                         >
                       </div>
                       <div class="input-group mb-1">
-                      <input type="button" class="btn btn-primary"
+                      <input type="submit" class="btn btn-primary"
                         value="Submit" name="submit" id="btnsubmit">
                         </div>
                     </div>
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Index</th>
+                          <th>Product</th>
+                          <th>Price</th>
+                          <th>Decription</th>
+                          <th>Quantity</th>
+                          <th>Image</th>
+                          <th colspan="2">Action</th>
+                          
+                      </thead>
+                      <tbody id="pdata">
+                     
+                      
+                       
+                      </tbody>
+                    </table>
                     <!--end::Body-->
                     <!--begin::Footer-->
                     <div class="card-footer">
@@ -157,25 +175,84 @@
       <!--end::App Main-->
       <!--begin::Footer-->
       <script>
+        function getProduct(){
+            $.ajax({
+              url:"<?php echo $GLOBALS['baseUrl']?>/apiproductget",
+              method:"GET",
+              success:function(data){
+                console.log(data)
+                createTable(data)
+              }
+            });
+        }
+        function createTable(data){
+          var data = JSON.parse(data);
+          str="";
+          var i=1;
+           for(index of data){
+            console.log(index)
+              str+=`
+               <tr class="align-middle">
+                            <td>${i}</td>
+                          <td>${index.price}</td>
+                          <td>${index.description}</td>
+                          <td>${index.qty}</td>
+                          <td><img src="upload/${index.pimg}" alt="" width="80px" height="80px"></td>
+                          <td><a href="deleteproduct/${index.pid}" class="btn btn-danger">DELETE</a></td>
+                          <td>
+                            <a href="editproduct/${index.pid}" class="btn btn-success">EDIT</a>
+                          </td>
+                         
+                            
+                        </tr>
+              `;
+            
+           i++;
+        }
+         $("#pdata").html(str);
+          console.log(str)
+      }      
         $(document).ready(function(){
-            $("#btnsubmit").on("click",function(){
-                
-                var data = {
-                "pname": $("#pname").val(),
-                "price" : $("#price").val(),
-                "qty" : $("#qty").val(),
-                "desc": $("#desc").val(),
-                "catid":$("#catid").val()
-                }
+          getProduct();
+            $("#productform").on("submit",function(e){
+              e.preventDefault();
+              
+                var form = document.getElementById('productform');
+                let formData = new FormData(form)
+                //alert(formData);
+                var file_data = $("#pimage").prop("files")[0];
+                console.log(file_data);
+                formData.append('pimage',file_data )
+                alert(formData.get('file'));
+              
                 $.ajax({
                     type:"POST",
                     url:"<?php echo $GLOBALS['baseUrl']?>/apiproductadd",
-                    data:data,
+                    data:formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
                     success:function(data){
                         alert(data);
+                        getProduct();
+
+
+
+
+
+                        \\\
                     }
                 })
+                
             })
+
         })
+
+    //     var form = document.getElementById('productform');
+    // form.addEventListener('submit', function(event) {
+    //     event.preventDefault(); // Prevent form submission to see the log
+    //     let formData = new FormData(form);
+    //     console.log(formData.get('pname')); // Correct way to get the value
+    // });
       </script>
      <?php include('footer.php')?>

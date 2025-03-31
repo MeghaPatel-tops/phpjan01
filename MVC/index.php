@@ -81,5 +81,8 @@ else if(isset($path) && $path =="apiproduct"){
 else if(isset($path) && $path =="apiproductadd"){
     $apiObj->create();
 }
+else if(isset($path) && $path =="apiproductget"){
+    $apiObj->view();
+}
 
 ?>
