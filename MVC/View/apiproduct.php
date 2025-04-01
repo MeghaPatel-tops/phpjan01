@@ -91,6 +91,15 @@
                           aria-describedby="emailHelp"
                           name="price"
                         />
+
+                        <input
+                          type="hidden"
+                          class="form-control"
+                          id="pid"
+                          aria-describedby="emailHelp"
+                          name="pid"
+                        />
+
                        
                       </div>
                       <div class="mb-2">
@@ -127,13 +136,17 @@
                           id="pimage"
                           name="pimage"
                         />
+                        <input type="hidden" name="pimagehidden" id="pimghidden">
+                        <div class="pimg" id="pimg"></div>
                         <label class="input-group-text" for="inputGroupFile02"
                           >Upload</label
                         >
                       </div>
                       <div class="input-group mb-1">
                       <input type="submit" class="btn btn-primary"
-                        value="Submit" name="submit" id="btnsubmit">
+                        value="Submit" name="submit" id="btnsubmit" onclick="formsubmit('productform')">
+                        <input type="submit" class="btn btn-primary"
+                        value="Update" name="submit" id="btnedit"  onclick="formsubmit('editproductform')" >
                         </div>
                     </div>
                     <table class="table table-bordered">
@@ -175,12 +188,69 @@
       <!--end::App Main-->
       <!--begin::Footer-->
       <script>
+
+        function deleteProduct(pid){
+            $.ajax({
+              url:"<?php echo $GLOBALS['baseUrl']?>/apiproductdelete/"+pid,
+              method:"POST",
+              success:function(data){
+                getProduct()
+              }
+            })
+        }
+        function editProduct(pid){
+          $.ajax({
+              url:"<?php echo $GLOBALS['baseUrl']?>/apiproductedit/"+pid,
+              method:"POST",
+              success:function(data){
+                data= JSON.parse(data);
+                EditForm(data)
+              }
+            })
+        }
+        function EditForm(data){
+          
+            $("#pname").val(data.pname);
+            $("#catid").val(data.catid);
+            $("#price").val(data.price);
+            $("#qty").val(data.qty);
+            $("#desc").val(data.description);
+            $("#pid").val(data.pid);
+            $("#pimghidden").val(data.pimg)
+            var img = $('<img />',
+             { id: 'Myid',
+               src: '<?php echo $GLOBALS['baseUrl']?>/upload/'+data.pimg, 
+               width: 80,
+               height:80
+
+             }) .appendTo($('#pimg'));
+             $("#btnsubmit").hide();
+             $("#btnedit").show();
+              $("form#productform").prop('id','editproductform');
+              alert($('form').attr('id')); 
+        }
+        function ClearForm(data){
+          //alert($('form').attr('id'));           
+           $("#pname").val("");
+            $("#catid").val("");
+            $("#price").val("");
+            $("#qty").val("");
+            $("#desc").val("");
+            $("#pid").val("");
+            $("#pimghidden").val("")
+            $("#Myid").remove();
+             $("#btnsubmit").show();
+             $("#btnedit").hide();
+             $("#pimage").val("");
+              $("form#editproductform").prop('id','productform');
+              alert($('form').attr('id')); 
+        }
         function getProduct(){
             $.ajax({
               url:"<?php echo $GLOBALS['baseUrl']?>/apiproductget",
               method:"GET",
               success:function(data){
-                console.log(data)
+                //console.log(data)
                 createTable(data)
               }
             });
@@ -189,62 +259,84 @@
           var data = JSON.parse(data);
           str="";
           var i=1;
-           for(index of data){
-            console.log(index)
-              str+=`
-               <tr class="align-middle">
-                            <td>${i}</td>
-                          <td>${index.price}</td>
-                          <td>${index.description}</td>
-                          <td>${index.qty}</td>
-                          <td><img src="upload/${index.pimg}" alt="" width="80px" height="80px"></td>
-                          <td><a href="deleteproduct/${index.pid}" class="btn btn-danger">DELETE</a></td>
-                          <td>
-                            <a href="editproduct/${index.pid}" class="btn btn-success">EDIT</a>
-                          </td>
-                         
-                            
-                        </tr>
-              `;
-            
-           i++;
-        }
-         $("#pdata").html(str);
-          console.log(str)
-      }      
-        $(document).ready(function(){
-          getProduct();
-            $("#productform").on("submit",function(e){
+                for(index of data){
+                    str+=`
+                    <tr class="align-middle">
+                                  <td>${i}</td>
+                                  <td>${index.pname}</td>
+                                <td>${index.price}</td>
+                                <td>${index.description}</td>
+                                <td>${index.qty}</td>
+                                <td><img src="upload/${index.pimg}" alt="" width="80px" height="80px"></td>
+                                <td> <input type="button" class="btn btn-danger btn-small"
+                        value="Delete" onclick="deleteProduct(${index.pid})"></td>
+                                <td>
+                                   <input type="button" class="btn btn-success btn-small"
+                        value="Edit" onclick="editProduct(${index.pid})">
+                                </td>
+                              
+                                  
+                              </tr>
+                    `;
+                  
+                i++;
+              }
+              $("#pdata").html(str);
+               
+        }    
+        function formsubmit(task){
+          alert("task="+task)
+          $(`#${task}`).on("submit",function(e){
               e.preventDefault();
               
-                var form = document.getElementById('productform');
+                var form = document.getElementById(`${task}`);
+                alert("formid="+form)
                 let formData = new FormData(form)
                 //alert(formData);
                 var file_data = $("#pimage").prop("files")[0];
-                console.log(file_data);
                 formData.append('pimage',file_data )
-                alert(formData.get('file'));
-              
-                $.ajax({
-                    type:"POST",
-                    url:"<?php echo $GLOBALS['baseUrl']?>/apiproductadd",
-                    data:formData,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success:function(data){
-                        alert(data);
-                        getProduct();
-
-
-
-
-
-                        \\\
-                    }
-                })
+                
+               if(task == "productform"){
+                //alert("insert")
+                    $.ajax({
+                        type:"POST",
+                        url:"<?php echo $GLOBALS['baseUrl']?>/apiproductadd",
+                        data:formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success:function(data){
+                            //  alert(data);
+                            ClearForm();
+                            getProduct();
+                        }
+                    })
+               }
+               else{
+                
+                      $.ajax({
+                          type:"POST",
+                          url:"<?php echo $GLOBALS['baseUrl']?>/apiproductupdate",
+                          data:formData,
+                          cache: false,
+                          contentType: false,
+                          processData: false,
+                          success:function(data){
+                            alert(data);
+                            ClearForm();
+                              getProduct();
+                          }
+                      })
+               }
+               
                 
             })
+         
+        }  
+        $(document).ready(function(){
+          $("#btnedit").hide();
+          getProduct();
+           
 
         })
 

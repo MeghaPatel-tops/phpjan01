@@ -94,7 +94,7 @@ class Model{
         foreach($where as $key=>$value){
             $query.= " And ".$key . "= '".$value."'";
         }
-        echo $query;
+        //echo $query;
 
         $res = $this->connection->query($query);
         return $res;

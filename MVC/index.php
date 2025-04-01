@@ -85,4 +85,19 @@ else if(isset($path) && $path =="apiproductget"){
     $apiObj->view();
 }
 
+else if(isset($path) && $path =="apiproductdelete"){
+    //echo $query;
+   $apiObj->apiproductdelete($query);
+}
+
+else if(isset($path) && $path =="apiproductedit"){
+    //echo $query;
+    $apiObj->apiproductedit($query);
+}
+
+else if(isset($path) && $path =="apiproductupdate"){
+    
+    $apiObj->apiproductupdate();
+}
+
 ?>
