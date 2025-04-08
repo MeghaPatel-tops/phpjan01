@@ -7,6 +7,7 @@ include('Model/Model.php');
 include('Controller/Contoller.php');
 include('Controller/UserController.php');
 include('Controller/ApiController.php');
+include('Controller/Auth.php');
 
 
 
@@ -98,6 +99,16 @@ else if(isset($path) && $path =="apiproductedit"){
 else if(isset($path) && $path =="apiproductupdate"){
     
     $apiObj->apiproductupdate();
+}
+
+else if(isset($path) && $path =="addtocart"){
+    $auth = new Auth();
+    $userObj->addtocart($query);
+}
+
+else if(isset($path) && $path =="viewcart"){
+    $auth = new Auth();
+    $userObj->viewcart();
 }
 
 ?>

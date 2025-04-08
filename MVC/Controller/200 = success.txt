@@ -1,4 +1,0 @@
-200 =  success
-500 = server erro
-404 = page not found
-419 = unauthorized 

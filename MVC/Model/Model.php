@@ -24,6 +24,23 @@ class Model{
         
     }
 
+    public function join_table_data($table,$join,$where){
+        //select * from table join table2 on table.id=table2.id where dataid=1;
+        $query= "select * from $table";
+        foreach($join as $key=>$value){
+            $query .= " join ".$key . " on ".$value;
+        }
+        $query.= " Where 1=1 ";
+        foreach($where as $key=>$value){
+            $query.= " And ".$key . "= '".$value."'";
+        }
+        $req = $this->connection->query($query);
+        while($row=$req->fetch_object()){
+            $rw[]=$row;
+        }
+        return $rw ?? [];
+    }
+
     public function select_data($table){
         $query = "select * from $table";
         $req= $this->connection->query($query);

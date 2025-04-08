@@ -5,8 +5,42 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
+  <script>
+       async function getProduct(catid){
+            const data = await fetch(`<?php echo $GLOBALS['baseUrl']?>/getProduct/${catid}`);
+            var result = await data.text();
+            result = JSON.parse(result);
+            var str="";
+            var url = "<?php echo $GLOBALS['baseUrl'].'/upload/'?>"
+            for(index of result){
+               
+                str+=` <div class="col-md-4">
+                        <div class="card productcard" style="width: 18rem;">
+                            <img src="${url}${index.pimg}" class="card-img-top productimage" alt="" >
+                            <div class="card-body">
+                                <h5 class="card-title"><b>${index.pname}</b></h5>
+                                <p class="card-text">Price:${index.price}</p>
+                                <p class="card-text">${index.description}</p>
+                                <a href="<?php echo $GLOBALS['baseUrl']?>/addtocart/${index.pid}" class="btn btn-primary">Add To Cart</a>
+                            </div>
+                    </div>
+            </div>`;
+            
+            }
+            
+            document.getElementById("productbycatid").innerHTML =str;
+        }
+    </script>
+  <script>
+      $(document).ready(function(){
+        getProduct(0);
+      })
+
+  </script>
   <style>
+    body{
+      overflow-x:hidden;
+    }
     /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
       margin-bottom: 0;

@@ -284,19 +284,18 @@
               $("#pdata").html(str);
                
         }    
-        function formsubmit(task){
-          alert("task="+task)
-          $(`#${task}`).on("submit",function(e){
+   
+          $(`#productform`).on("submit",function(e){
               e.preventDefault();
               
-                var form = document.getElementById(`${task}`);
+                var form = document.getElementById(`productform`);
                 alert("formid="+form)
                 let formData = new FormData(form)
                 //alert(formData);
                 var file_data = $("#pimage").prop("files")[0];
                 formData.append('pimage',file_data )
                 
-               if(task == "productform"){
+              
                 //alert("insert")
                     $.ajax({
                         type:"POST",
@@ -310,11 +309,26 @@
                             ClearForm();
                             getProduct();
                         }
-                    })
-               }
-               else{
+                    })    
                 
-                      $.ajax({
+            })
+        $(document).ready(function(){
+          $("#btnedit").hide();
+          getProduct();
+           
+
+        })
+        $(`#editproductform`).on("submit",function(e){
+              e.preventDefault();
+              
+                var form = $("#editproductform");
+                alert("formid="+form)
+                let formData = new FormData(form)
+                //alert(formData);
+                var file_data = $("#pimage").prop("files")[0];
+                formData.append('pimage',file_data );
+                
+                $.ajax({
                           type:"POST",
                           url:"<?php echo $GLOBALS['baseUrl']?>/apiproductupdate",
                           data:formData,
@@ -327,12 +341,8 @@
                               getProduct();
                           }
                       })
-               }
-               
                 
             })
-         
-        }  
         $(document).ready(function(){
           $("#btnedit").hide();
           getProduct();

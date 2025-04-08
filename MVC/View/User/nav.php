@@ -33,7 +33,9 @@
                 }
 
           ?>
-        
+        <li><a href="<?php echo $GLOBALS['baseUrl']?>/viewcart"> <img src="<?php echo $GLOBALS['baseUrl']?>/upload/icons8-cart-48.png" height="30px" alt="" style="z-index=-1">
+        <span style="color:white;z-index:1"><?php echo $count ?? 0?></span>
+        </a></li>
       </ul>
     </div>
   </div>
